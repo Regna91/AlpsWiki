@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Folder Edit</h1>
+    <p><a href="{{ path('homepage') }}">Zurück</a></p>
+
+    {% for message in app.flashes('success') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    {% include 'folder/_form.html.twig' with {'submit': 'Update'} %}
+{% endblock %}

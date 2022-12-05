@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Show</h1>
+    <p><a href="{{ path('homepage') }}">Zurück</a></p>
+
+    <ul>
+        <li>{{ folder.name }}</li>
+        <li>{{ folder.description }}</li>
+        <li>{{ folder.slug }}</li>
+    </ul>
+
+{% endblock %}

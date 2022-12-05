@@ -9,31 +9,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route("/")]
-    public function indexAction(EntityManagerInterface $entityManager) : Response
+    #[Route("/", name: "homepage")]
+    public function index(EntityManagerInterface $entityManager) : Response
     {
-        $res = $entityManager->getRepository(Folder::class)->findAll();
+        $folders = $entityManager->getRepository(Folder::class)->findBy(['enabled' => true],['sorting' => 'ASC']);
 
-        dump($res);
+        //dump($folders);
 
-        return $this->render('home/index.html.twig');
-    }
-
-    #[Route("/new")]
-    public function newAction(EntityManagerInterface $entityManager) : Response
-    {
-        $folder = new Folder();
-        $folder->setName('Test Folder'. rand(10, 30));
-
-        $entityManager->persist($folder);
-        $entityManager->flush();
-
-        return new Response('Finished');
+        return $this->render('home/index.html.twig', [
+            'folders' => $folders,
+        ]);
     }
 
 
     #[Route("/404")]
-    public function notFoundAction()
+    public function notFound()
     {
         return $this->render('error/404.html.twig');
     }

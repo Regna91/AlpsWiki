@@ -1,5 +1,24 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    Content of the page...
+    <h1>Folders</h1>
+    <p><a href="{{ path('folder_newForm') }}">New</a></p>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Link</th>
+            <th>Bearbeiten</th>
+            <th>Delt</th>
+        </tr>
+        {% for folder in folders %}
+            <tr>
+                <td>{{ folder.name }}</td>
+                <td><a href="{{ path('folder_show', { slug: folder.slug }) }}">{{ folder.slug }} </a></td>
+                <td><a href="{{ path('folder_editForm', { id: folder.id }) }}">Bearbeiten </a></td>
+                <td><a href="{{ path('folder_delete', { id: folder.id }) }}">Del</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
 {% endblock %}
